@@ -2,71 +2,58 @@
 	<head>
 		<title>Чекушин Андрей</title>
 		<style>
-			h1{
-				text-align:center;
-				font-size:24pt;
+			ol, ul{
+				list-style-type: lower-greek;
 			}
-			p{
-				text-align:justify;
-				font-family:verdana;
-				font-size:14pt;
+
+			li a{
+				color: #000000;
+				text-decoration: none;
 			}
-			p.ph2{
-				text-align:right;
-				font-family:arial;
-				font-size:14pt;
+
+			li:hover{
+				background-color: #CCCCCC;
 			}
-			p.ph3{
-				text-align:left;
-				font-family:serif;
-				font-size:14pt;
+
+			#menu{
+				width: 200px;
 			}
-			p.ph4{
-				text-align:center;
-				font-size:14pt;
-			}
-			span.selection{
-				font-weight:bold;
-			}
-			span.ital{
-				font-style:italic;
-			}
-			span.littletxt{font-size:10pt;}
-			span.red{color:red;}
-			span.orange{color:orange;}
-			span.yellow{color:yellow;}
-			span.green{color:green;}
-			span.aqua{color:aqua;}
-			span.blue{color:blue;}
-			span.viol{color:violet;}
-			span.undl{text-decoration:underline;}
 		</style>
 	</head>
     <body>
-		<h1>Радуга</h1>
-		
-		<p><span class=selection>Радуга &ndash;</span> атмосферное оптическое и метеорологическое явление, наблюдаемое обычно после дождя или перед ним. 
-		Оно выглядит как <span class="selection ital">дуга</span> или <span class="selection ital">окружность</span>, составленная из цветов спектра 
-		(глядя снаружи &ndash; внутрь дуги: <span class=red>красный</span>,
-		<span class=orange>оранжевый</span>, <span class=yellow>желтый</span>,
-		<span class=green>зеленый</span>, <span class=aqua>голубой</span>,
-		<span class=blue>синий</span>, <span class=viol>фиолетовый</span>)</p>
-		
-		<h1>Причина радуги &mdash; преломление света</h1>
-		
-		<p class=ph2><i>Радуга</i> возникает из-за того, что <span class=undl>солнечный свет испытвает преломление в капельках воды,</span> взвешенных в воздухе.
-		Эти капельки по-разному отклоняют свет разных цветов (<span class=littletxt><span class=red>Красный</span> свет отклоняется на 137 градусов 30 минут, а 
-		<span class=viol>фиолетовый</span> на 139&#176;20'</span>),в результате чего белый свет разлагается в спектр. Наблюдателю кажется, что из пространства по
-		концентрическим кругам (дугам) исходит разноцветное свечение (при этом источник яркого света всегда находится за спиной наблюдателя</p>
-		
-		<p class=ph3>Хотя многоцветный спектр радуги непрерывен, по традиции в нем выделяют <span class=undl>7</span> цветов. Считают, что первым выбрал число <span class=undl>7</span> 
-		<span class=selection>Исаак Ньютон</span>, для котоорого число <span class=undl>7</span> имело специальное символическое значение (по пифагорейским, богословским или нумерологическим соображениям).
-		Причём первоначально он различал только пять цветов - <span class=red>красный</span>, <span class=yellow>желтый</span>, <span class=green>зеленый</span>, 
-		<span class=aqua>голубой</span>, <span class=viol>фиолетовый</span>, о чём и написал в своей "<span class=ital>Оптике</span>". Но впоследствии, стремясь создать соответсвие между
-		числом цветов спектра и числом основных тонов музыкальной гаммы, Ньютон добавил к пяти перечисленным цветам спектра еще два.</p>
-		
-		<p class=ph4>Для запоминания их последовательности есть мнемонические фразы, первые буквы каждого слова в которых соотвествуют первым буквам названия цвета:
-		<br/><span class="ital selection">Как однажды Жак-звонарь головой сломал фонарь.</span>
-		<br/><span class="ital selection">Каждый охотник желает знать, где сидит фазан.</span></p>
+    	<div id = menu>
+	    	<ol class = sp>
+	    		<li><a href=#>Бакалавриат</a></li>
+	    		<ul>
+	    			<li>09.03.02</li>
+	    			<li>09.03.03</li>
+	    			<li>09.03.05</li>
+	    		</ul>
+	    		<li><a href=#>Магистратура</a></li>
+	    		<li><a href=#>Аспирантура</a></li>
+	    	</ol>
+    	</div>
+
+    	<table border="1" bgcolor=#FEFEFE width="300">
+    		<tr>
+    			<td colspan="5">1</td>
+    		</tr>
+    		<tr>
+    			<td rowspan="4">2</td>
+    			<td colspan="4">3</td>
+    		</tr>
+    		<tr>
+    			<td rowspan="3">4</td>
+    			<td colspan="3">5</td>
+    		</tr>
+    		<tr>
+    			<td rowspan="2">6</td>
+    			<td colspan="2">7</td>
+    		</tr>
+    		<tr>
+    			<td>8</td>
+    			<td>9</td>
+    		</tr>
+    	</table>
 	</body>
 </hthml>
