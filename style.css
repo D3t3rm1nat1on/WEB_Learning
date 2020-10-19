@@ -1,0 +1,44 @@
+ol{
+    list-style-type: lower-greek;
+}
+
+ul{
+    list-style-type: square;
+}
+
+li a{
+    color: #000000;
+    text-decoration: none;
+}
+
+a:hover{
+    background-color: khaki;
+}
+
+#header{
+    background-color: bisque;
+    background-color: ;
+    font-size: larger;
+}
+
+#menu{
+    width: 200px;
+    background-color: aquamarine;
+}
+
+#content{
+    padding: 5px 10px 20px 10px; /* top right bottom left */
+    background-color: #deb887;
+}
+
+#bottom{
+    background-color: darkkhaki;
+}
+
+.text{
+    font-size: large;
+}
+
+table{
+    border-style: wave;
+}
