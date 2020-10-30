@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Логин</title>
+    <style>
+        table{
+            font-family: "Andale Mono";
+            padding: 20px;
+            border: solid cadetblue;
+        }
+
+        .g1{
+            font-size: 24px;
+        }
+
+        .g2{
+            font-size: 18px;
+        }
+
+        input{
+            border-style: dot-dot-dash;
+            font-size: 15px;
+            height: 40px;
+            width: 100%
+        }
+
+        span.g_enter{
+            font-size: 20px;
+        }
+
+        a{
+
+            text-decoration-line: none;
+        }
+
+        input.next{
+            color: white;
+            font-size: 20px;
+            width: min-content;
+            background-color: cornflowerblue;
+        }
+
+        td{
+            padding: 10px;
+        }
+    </style>
+</head>
+<body background="images/background.jpg">
+<form>
+    <table align="center" width="600" border="0" bgcolor="#d0f5ff">
+        <tr>
+            <td colspan="2"><span class="g1">Вход в аккаунт</span></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="text" name="login" placeholder="Имя прользователя"></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="password" name="password" placeholder="Пароль"></td>
+        </tr>
+        <tr>
+            <td align="left"><input class="next" type="submit" value="Войти в аккаунт"></td>
+            <td align="right"><span class="g_enter"><a href="registration.html">Вернуться к регистрации</a></span></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
