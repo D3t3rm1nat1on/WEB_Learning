@@ -1,5 +1,5 @@
 <?php #init
-    include_once '../../functions/get_tovar.php';
+    include_once '../../functions/api.php';
     $groups = get_groups();
 ?>
 
