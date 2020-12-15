@@ -42,22 +42,38 @@
     </style>
     <script src="jq.js"></script>
     <script src="jq_empty_form.js"></script>
+    <script>
+        function user_check(){
+            let name = document.getElementById('id_name')
+            let pass = document.getElementById('id_pass')
+            if (name.value == '' || pass.value == '')
+                return;
+            let btn = document.getElementById('id_button')
+            // сломался phpMyAdmin, поэтому проверка тут без БД (условная)
+            if (name.value == 'user' && pass.value =="pass"){
+                btn.classList.remove('disabled')
+                document.getElementsByClassName('rf').submit();
+            } else {
+                alert('Неправильное имя пользователя или пароль')
+            }
+        }
+    </script>
 </head>
 <body background="images/background.jpg">
 <div class="form_box">
-    <form class="rf" action="#">
+    <form class="rf" action="index.php" method="post">
         <table align="center" width="600" border="0" bgcolor="#d0f5ff">
             <tr>
                 <td colspan="2"><span class="g1">Вход в аккаунт</span></td>
             </tr>
             <tr>
-                <td colspan="2"><input class="rfield" type="text" name="login" placeholder="Имя прользователя"></td>
+                <td colspan="2"><input id="id_name" class="rfield" type="text" name="username" placeholder="Имя прользователя"></td>
             </tr>
             <tr>
-                <td colspan="2"><input class="rfield" type="password" name="password" placeholder="Пароль"></td>
+                <td colspan="2"><input id="id_pass" class="rfield" type="password" name="psw" placeholder="Пароль"></td>
             </tr>
             <tr>
-                <td align="left"><input class="next btn_submit disabled" type="submit" value="Войти в аккаунт"></td>
+                <td align="left"><input id="id_button" class="next btn_submit disabled" type="button" value="Войти в аккаунт" onclick="user_check();"></td>
                 <td align="right"><span class="g_enter"><a href="registration.html">Вернуться к регистрации</a></span></td>
             </tr>
         </table>

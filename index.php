@@ -10,12 +10,6 @@ $groups = get_groups();
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="stylesheet" href="Analog-Clock-jsRapClock/jsRapClock.css" />
 		<link rel="stylesheet" href="Analog-Clock-jsRapClock/index.css" />
-		<script src="jq.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="/Analog-Clock-jsRapClock/jsRapClock.js"></script>
-
-		<link rel="stylesheet" href="Analog-Clock-jsRapClock/jsRapClock.css" />
-		<link rel="stylesheet" href="Analog-Clock-jsRapClock/index.css" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="Analog-Clock-jsRapClock/jsRapClock.js"></script>
 
@@ -36,10 +30,26 @@ $groups = get_groups();
             label:hover{
                 background: #009ac2;
             }
+            ul{
+                list-style-type: disc;
+            }
+            #demo1{
+                width: 150px;
+            }
+            td{
+                vertical-align: top;
+            }
+            #form-id{
+                padding-top: 200px;
+                padding-right: 5px;
+            }
+            #id_user {
+                font-size: 18px;
+            }
         </style>
 	</head>
     <body background="images/background.jpg">
-		<div id="demo1" ></div>
+
 
 
 	<table border="5" width="1400px" align="center">
@@ -52,14 +62,33 @@ $groups = get_groups();
 			</tr>
 			<tr>
 				<td id="menu">
+                    <div id="id_user">
+                        <?php
+                        $username = $_POST[username] ? $_POST[username] : 'Гость';
+                        echo 'Вы вошли как '.$username;
+                        ?>
+                    </div>
+                    <div id="demo1"></div>
                     <form method="post" action="index.php" id="form-id">
                         <div>
                             <input id="php" type="hidden" name="php">
+                            <input id="php" type="hidden" name="username" value=<?php echo $username?>>
                             <ol class = sp>
-                                <li><label onclick="go('form-id', '1');">На главную</label><br></li>
-                                <li><label onclick="go('form-id', '2');">Вывести только новогоднюю коллекцию</label><br></li>
-                                <li><label onclick="go('form-id', '3');">Товары для взрослых</label><br></li>
-                                <li><label onclick="go('form-id', '4');">Отсортироватьт по названию</label><br></li>
+                                <li>Просмотр
+                                    <ul>
+                                        <li><label onclick="go('form-id', '1');">На главную</label><br></li>
+                                        <li><label onclick="go('form-id', '2');">Вывести только новогоднюю коллекцию</label><br></li>
+                                        <li><label onclick="go('form-id', '3');">Товары для взрослых</label><br></li>
+                                        <li><label onclick="go('form-id', '4');">Отсортироватьт по названию</label><br></li>
+
+                                    </ul>
+                                </li>
+                                <li>Пользователь
+                                    <ul>
+                                        <li><a href="login.html">Войти как пользователь</a></li>
+                                        <li><a href="registration.html">Зарегестрироваться</a></li>
+                                    </ul>
+                                </li>
                             </ol>
                         </div>
                     </form>
@@ -75,16 +104,17 @@ $groups = get_groups();
                             <td>Возрастное ограничение</td>
                         </tr>
                         <?php
-                        include_once "phpCode/$_POST[php].php";
+                        $php = $_POST[php] ? $_POST[php] : '1';
+                        include_once "phpCode/$php.php";
                         ?>
                     </table>
 				</td>
 			</tr>
 			<tr>
 				<td id="bottom" colspan="2">
-					<div>
-						BOTTOM
-					</div>
+					<div align="right">
+                        &copy; Андрей Чекушин БСБО-05-18
+                    </div>
 				</td>
 			</tr>
 		</table>

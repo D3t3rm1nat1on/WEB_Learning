@@ -44,29 +44,58 @@
             padding: 10px;
         }
     </style>
+    <script src="jq.js"></script>
+    <script src="jq_empty_form.js"></script>
+    <script>
+        function reg(){
+            // сломался phpMyAdmin, поэтому тут замена на болванку вместо БД
+            let inputElements = document.getElementsByTagName('input');
+            let name = inputElements.namedItem('username').value;
+            let pass = inputElements.namedItem('psw').value;
+            let pass_check = inputElements.namedItem('psw_check').value;
+            if (name == 'user'){
+                alert('Пользователь с таким именем уже существует');
+                return;
+            }
+            if (pass != pass_check){
+                alert('Пароли не совпадают');
+                return;
+            }
+            let btn = document.getElementsByClassName('next')[0];
+            for (let inputElement of inputElements) {
+                if (inputElement.value == '')
+                    return;
+            }
+            btn.classList.remove('disabled');
+            document.getElementsByClassName('rf').submit();
+
+        }
+    </script>
 </head>
 <body background="images/background.jpg">
-<form>
-    <table align="center" width="600" border="0" bgcolor="#d0f5ff">
-        <tr>
-            <td colspan="2"><span class="g1">Создайте аккаунт</span></td>
-        </tr>
-        <tr>
-            <td><input type="text" name="first_name" placeholder="Имя"></td>
-            <td><input type="text" name="last_name" placeholder="Фамилия"></td>
-        </tr>
-        <tr>
-            <td colspan="2"><input type="text" name="username" placeholder="Имя пользователя"></td>
-        </tr>
-        <tr>
-            <td><input type="password" name="psw" placeholder="Пароль"></td>
-            <td><input type="password" name="psw_check" placeholder="Подтвердить"></td>
-        </tr>
-        <tr>
-            <td><span class="g_enter"><a href="login.html">Войти</a></span></td>
-            <td align="right"><input class="next" type="submit" value="Далее"></td>
-        </tr>
-    </table>
-</form>
+<div class="form_box">
+    <form class="rf" action="index.php" method="post">
+        <table align="center" width="600" border="0" bgcolor="#d0f5ff">
+            <tr>
+                <td colspan="2"><span class="g1">Создайте аккаунт</span></td>
+            </tr>
+            <tr>
+                <td><input class="rfield" type="text" name="first_name" placeholder="Имя"></td>
+                <td><input class="rfield" type="text" name="last_name" placeholder="Фамилия"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input class="rfield" type="text" name="username" placeholder="Имя пользователя"></td>
+            </tr>
+            <tr>
+                <td><input class="rfield" type="password" name="psw" placeholder="Пароль"></td>
+                <td><input class="rfield" type="password" name="psw_check" placeholder="Подтвердить"></td>
+            </tr>
+            <tr>
+                <td><span class="g_enter"><a href="login.html">Войти</a></span></td>
+                <td align="right"><input class="next btn_submit disabled" type="button" value="Далее" onclick="reg();"></td>
+            </tr>
+        </table>
+    </form>
+</div>
 </body>
 </html>
