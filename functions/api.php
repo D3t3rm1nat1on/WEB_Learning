@@ -1,123 +1,39 @@
-<?php #init
-function get_groups()
-{
-    $mysqli = new mysqli("localhost", "andrey", "12345", "testdb");
+<?php
 
-    if ($mysqli->connect_error) {
-        die('Error : (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
+function connect() {
+    $server = $_SERVER['localhost'];
+    $username = 'root';
+    $password = '';
+    $dbname = 'site_db';
+    $charset = 'utf8';
+
+    $connection = new mysqli($server, $username, $password, $dbname);
+
+    if ($connection->connect_error){
+        die('Ошибка соединения '.$connection->connect_error);
     }
 
-    $groups = array();
-
-    $query = "SELECT `group` FROM `tovar` GROUP BY `group`";
-
-    $result = $mysqli->query($query);
-    while ($row = $result->fetch_assoc()) {
-        $groups[$row['group']] = array();
+    if (!$connection->set_charset($charset)){
+        echo 'Ошибка установки кодировки UTF8';
     }
 
-    foreach ($groups as $group_name => $group) {
-        $query = "SELECT * FROM `tovar` WHERE `group` = '{$group_name}'";
-        $result = $mysqli->query($query);
-        for ($i = 0; $row = $result->fetch_assoc(); $i++) {
-            array_push($group, $row);
-        }
-        $groups[$group_name] = $group; // ИНАЧЕ НИЧЕГО НЕ ОБНОВИТСЯ
-    }
-    return $groups;
+    return $connection;
 }
 
-/**
- * @param array $where
- * @return array
- */
-function find_tovar($where = NULL)
-{
-    $mysqli = new mysqli("localhost", "andrey", "12345", "testdb");
-
-    if ($mysqli->connect_error) {
-        die('Error : (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
-    }
-
-    $query = "select * from tovar";
-    if (!empty($where)) {
-        $query .= " where " . join(" and ", $where);
-    }
-    echo $query;
-
-    $tovar = array();
-
-    $result = $mysqli->query($query);
-    while ($row = $result->fetch_assoc()) {
-        array_push($tovar, $row);
-    }
-
-    return $tovar;
+function check_login($username, $password) {
+    $connection = connect();
+    $query = "SELECT * FROM `user_table` WHERE `username` = \"$username\" and `password` = \"$password\"";
+    $result = $connection->query($query);
+    return $result->num_rows != 0;
 }
 
-/**
- * @param array $where
- */
-function delete_tovar($where = NULL)
-{
-    $mysqli = new mysqli("localhost", "andrey", "12345", "testdb");
-
-    if ($mysqli->connect_error) {
-        die('Error : (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
-    }
-
-    $query = "delete from tovar ";
-    if (!empty($where)) {
-        $query .= " where " . join(" and ", $where);
-        $mysqli->query($query);
-    }
+function check_username($username){
+    $connection = connect();
+    $query = "SELECT * FROM `user_table` WHERE `username` = \"$username\"";
+    $result = $connection->query($query);
+    return $result->num_rows != 0;
 }
 
-/**
- * @param array $tovar
- */
-function add_tovar($tovar)
-{
-    $mysqli = new mysqli("localhost", "andrey", "12345", "testdb");
+function create_user() {
 
-    if ($mysqli->connect_error) {
-        die('Error : (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
-    }
-
-    $keys = array();
-    $items = array();
-    foreach ($tovar as $key => $item){
-        array_push($keys, $key);
-        array_push($items, "'$item'");
-    }
-
-    $query = "INSERT INTO `tovar`(".join(', ', $keys).") VALUES (".join(', ', $items).")";
-    echo $query.'<br>';
-    if (!empty($tovar)) {
-        $mysqli->query($query);
-    }
 }
-
-/**
- * @param array $tovar
- */
-function update_tovar($tovar, $id)
-{
-    $mysqli = new mysqli("localhost", "andrey", "12345", "testdb");
-
-    if ($mysqli->connect_error) {
-        die('Error : (' . $mysqli->connect_errno . ') ' . $mysqli->connect_error);
-    }
-
-    $set = array();
-    foreach ($tovar as $key => $item) {
-        array_push($set, "`$key` = '$item'");
-    }
-
-    $query = "UPDATE `tovar` SET " . join(", ", $set) . " WHERE `id` = $id";
-    echo $query . '<br>';
-    if (!empty($tovar)) {
-        $mysqli->query($query);
-    }
-}
-?>

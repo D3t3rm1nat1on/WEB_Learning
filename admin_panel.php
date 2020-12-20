@@ -1,4 +1,9 @@
 <?php
+if ($_REQUEST[admin_password] != 'admin' or $_REQUEST[admin_login] != 'admin')
+{
+    die("Неверные данные для админки");
+}
+
 echo "<pre>";
 print_r($_POST);
 echo "</pre>";
@@ -12,6 +17,7 @@ echo "</pre>";
     <link rel="stylesheet" href="Analog-Clock-jsRapClock/index.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="Analog-Clock-jsRapClock/jsRapClock.js"></script>
+    <script src="jq_empty_form.js"></script>
 
     <script>
         $(document).ready(function(){
@@ -23,16 +29,25 @@ echo "</pre>";
             document.getElementById(form_id).submit();
         }
 
-        function show_where(column, search, form_id){
-            document.getElementById('id_search').value = 'WHERE `' + column +  '`="' + search + '"';
-            go(form_id, 'search');
+        function open_update_event(form_id, title){
+            document.getElementById('id_title').value = title;
+            document.getElementById('id_update_php').value = 'update_selected';
+            document.getElementById(form_id).submit();
         }
 
-        function show_title(form_id, title){
-            document.getElementById('id_title').value = title;
-            go(form_id, 'show title');
+        function insert_check() {
+            let form = document.getElementById('insert_form');
+            let inputElements = form.getElementsByTagName('input');
+            for (let inputElement of inputElements) {
+                if (inputElement.value == '')
+                    return;
+            }
+            let btn = document.getElementsByClassName('next')[0];
+            btn.classList.remove('disabled');
+            document.getElementsByClassName('rf').submit();
         }
     </script>
+
     <style>
         .lolTable{
             width: 100%;
@@ -79,26 +94,23 @@ echo "</pre>";
         <td id="menu">
             <div id="id_user">
                 <?php
-                $username = $_POST[username] ? $_POST[username] : 'Гость';
-                echo 'Вы вошли как '.$username;
+                echo 'Вы вошли как Admin';
                 ?>
             </div>
             <div id="demo1"></div>
-            <form method="post" action="index.php" id="form-id_menu">
+            <form method="post" action="admin_panel.php" id="form-id_menu">
                 <div>
+                    <input type="hidden" name="admin_login" value="admin">
+                    <input type="hidden" name="admin_password" value="admin">
                     <input id="id_php" type="hidden" name="php">
-                    <input type="hidden" name="username" value=<?php echo $username?>>
                     <ol class = sp>
-                        <li>Просмотр
+                        <li><a href="index.php">Вернуться на сайт</a></li>
+                        <li>Админка
                             <ul>
-                                <li><label onclick="go('form-id_menu', '1');">На главную</label><br></li>
-                                <li><label onclick="go('form-id_menu', '2');">Отсортировать по названию</label><br></li>
-                                <li><label onclick="go('form-id_menu', '3');">Отсортировать по возрасту</label><br></li>
-
+                                <li><label onclick="go('form-id_menu', 'insert');">Добавить</label><br></li>
+                                <li><label onclick="go('form-id_menu', 'delete');">Удалить</label><br></li>
+                                <li><label onclick="go('form-id_menu', 'update');">Изменить</label><br></li>
                             </ul>
-                        </li>
-                        <li>
-                            <a href="admin_login.php">Админка</a>
                         </li>
                     </ol>
                 </div>
@@ -107,11 +119,8 @@ echo "</pre>";
         <td id="content">
 
             <?php
-            include_once 'functions/show.php';
-
-            $php = $_POST[php] ? $_POST[php] : '1';
+            $php = $_POST[php] ? $_POST[php] : 'insert';
             include_once "phpCode/$php.php";
-
             ?>
         </td>
     </tr>

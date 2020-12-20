@@ -41,8 +41,44 @@
 
     </style>
     <script src="jq.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="jq_empty_form.js"></script>
     <script>
+        // function user_check() { БЛЯДСКИЙ JS
+        //     let btn = document.getElementById('id_button')
+        //     let form = document.getElementsByClassName('rf')
+        //     // btn.classList.remove('disabled')
+        //     // document.getElementsByClassName('rf').submit();
+        //
+        //     let name = document.getElementById('id_name')
+        //     let pass = document.getElementById('id_pass')
+        //     if (name.value == '' || pass.value == '')
+        //         return;
+        //
+        //     let dataInf = $('.rf').find('input').serialize();
+        //     let request = new XMLHttpRequest();
+        //     request.open('POST', 'check.php');
+        //
+        //     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded', charset = 'utf8');
+        //     request.send(dataInf);
+        //
+        //     let response = 0;
+        //     request.onreadystatechange = function () {
+        //         if (request.readyState == 4) {
+        //             if (request.status == 200) {
+        //                 response = request.responseText;
+        //                 if (response == 1) {
+        //                     alert("NICE")
+        //                     btn.classList.remove('disabled')
+        //                     form.submit()
+        //                 } else {
+        //                     alert('Неправильное имя пользователя или пароль')
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
         function user_check(){
             let name = document.getElementById('id_name')
             let pass = document.getElementById('id_pass')

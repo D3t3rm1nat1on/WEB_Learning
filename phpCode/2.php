@@ -1,22 +1,29 @@
 <?php
-    foreach ($groups as $group => $goods) {
-        $array = array();
-        foreach ($goods as $product){
-            if ($product['collection'] == 'new year'){
-                array_push($array, $product);
-            }
-        }
-        if(count($array) > 0) {
-            echo '<tr><td colspan="5" bgcolor="#faebd7">',$group ,'</td></tr>';
-            foreach ($array as $product) {
-                echo '<tr>';
-                echo '<td>'.$product['name'].'</td>';
-                echo '<td>'.$product['price'].'</td>';
-                echo '<td>'.$product['amount'].'</td>';
-                echo '<td>'.$product['collection'].'</td>';
-                echo '<td>'.$product['age_limit'].'</td>';
-                echo '</tr>';
-            }
-        }
+$connection = connect();
+$query = "SELECT * FROM `stat_table` ORDER BY `title`";
+$result = $connection->query($query);
 
-    }
+$username = $_POST[username] ? $_POST[username] : 'Гость';
+
+echo '<form method="post" action="index.php" id="form-id_list">';
+echo '        <input id="id_search" type="hidden" name="where_string">';
+echo '        <input id="id_title" type="hidden" name="title">';
+echo '        <input type="hidden" name="username" value='.$username.'>';
+echo '        <table border="1" bgcolor="#ffebcd" class="lolTable">';
+echo '            <tr><td colspan="5" bgcolor="#bdb76b">Список текстов (КЛИКАБЕЛЬНО)</td></tr>';
+echo '            <tr bgcolor="#f0e68c">';
+echo '                <td>Название</td>';
+echo '                <td>Автор</td>';
+echo '                <td>Тип</td>';
+echo '                <td>Возрастное ограничение</td>';
+echo '            </tr>';
+while ($row = $result->fetch_assoc()){
+    echo "<tr>";
+    echo "<td><label onclick=\"show_title('form-id_list', '$row[title]');\">$row[title]</td>";
+    echo "<td><label onclick=\"show_where('author', '$row[author]', 'form-id_list');\">$row[author]</td>";
+    echo "<td><label onclick=\"show_where('type', '$row[type]', 'form-id_list');\">$row[type]</td>";
+    echo "<td><label onclick=\"show_where('age_limit', '$row[age_limit]', 'form-id_list');\">$row[age_limit]</td>";
+    echo "</tr>";
+}
+echo '</table>';
+echo '</form>';
